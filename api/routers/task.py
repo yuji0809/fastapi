@@ -15,12 +15,12 @@ async def create_task(task_body: task_schema.TaskCreate):
     # (id=1, title=tast_body.title, done=task_body.done) と同義
     return task_schema.TaskCreateResponse(id=1, **task_body.dict())
 
-@router.put("/tasks/{task_id}")
-async def update_tasks():
+@router.put("/tasks/{task_id}", response_model=task_schema.TaskCreateResponse)
+async def update_tasks(task_id: int, task_body: task_schema.TaskCreate):
     # UPDATEメソッドの処理
-    pass
+    return task_schema.TaskCreateResponse(id=task_id, **task_body.dict())
 
-@router.delete("/tasks/{task_id}")
-async def delete_task():
+@router.delete("/tasks/{task_id}", response_model=None)
+async def delete_task(task_id: int):
     # DELETEメソッドの処理
-    pass
+    return
